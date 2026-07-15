@@ -16,5 +16,70 @@ move_x = move_x * walk_speed;
 /// @DnDAction : YoYo Games.Miscellaneous.Debug_Show_Message
 /// @DnDVersion : 1
 /// @DnDHash : 438146EC
-/// @DnDDisabled : 1
-/// @DnDArgument : "msg" ""
+/// @DnDArgument : "msg" "move_x"
+show_debug_message(string(move_x));
+
+/// @DnDAction : YoYo Games.Collisions.If_Object_At
+/// @DnDVersion : 1.1
+/// @DnDHash : 27FBDA57
+/// @DnDComment : are you on the ground?
+/// @DnDArgument : "x_relative" "1"
+/// @DnDArgument : "y" "2"
+/// @DnDArgument : "y_relative" "1"
+/// @DnDArgument : "object" "obj_floor_temp"
+/// @DnDSaveInfo : "object" "obj_floor_temp"
+var l27FBDA57_0 = instance_place(x + 0, y + 2, [obj_floor_temp]);if ((l27FBDA57_0 > 0)){	/// @DnDAction : YoYo Games.Common.Variable
+	/// @DnDVersion : 1
+	/// @DnDHash : 1D4034A9
+	/// @DnDComment : landed on the ground.$(13_10)reset the Y of movement$(13_10)back to 0.$(13_10)
+	/// @DnDParent : 27FBDA57
+	/// @DnDArgument : "expr_relative" "1"
+	/// @DnDArgument : "var" "move_y"
+	move_y += 0;
+
+	/// @DnDAction : YoYo Games.Mouse & Keyboard.If_Key_Pressed
+	/// @DnDVersion : 1
+	/// @DnDHash : 33404EB5
+	/// @DnDParent : 27FBDA57
+	var l33404EB5_0;l33404EB5_0 = keyboard_check_pressed(vk_space);if (l33404EB5_0){	/// @DnDAction : YoYo Games.Common.Variable
+		/// @DnDVersion : 1
+		/// @DnDHash : 3D0F264C
+		/// @DnDComment : update move_y$(13_10)for a jump!
+		/// @DnDParent : 33404EB5
+		/// @DnDArgument : "expr" "-jump_speed"
+		/// @DnDArgument : "var" "move_y"
+		move_y = -jump_speed;}}
+
+/// @DnDAction : YoYo Games.Common.Else
+/// @DnDVersion : 1
+/// @DnDHash : 33CA5E5D
+/// @DnDComment : you are in the air.
+else{	/// @DnDAction : YoYo Games.Common.If_Variable
+	/// @DnDVersion : 1
+	/// @DnDHash : 552CF827
+	/// @DnDComment : if we are falling$(13_10)after a jump
+	/// @DnDParent : 33CA5E5D
+	/// @DnDArgument : "var" "move_y"
+	/// @DnDArgument : "op" "1"
+	/// @DnDArgument : "value" "jump_speed"
+	if(move_y < jump_speed){	/// @DnDAction : YoYo Games.Common.Variable
+		/// @DnDVersion : 1
+		/// @DnDHash : 2DBEFF23
+		/// @DnDComment : add gravity
+		/// @DnDParent : 552CF827
+		/// @DnDArgument : "expr" "1"
+		/// @DnDArgument : "expr_relative" "1"
+		/// @DnDArgument : "var" "move_y"
+		move_y += 1;}}
+
+/// @DnDAction : YoYo Games.Movement.move_and_collide
+/// @DnDVersion : 1
+/// @DnDHash : 270EACC3
+/// @DnDComment : the 1st object$(13_10)listed at top here$(13_10)is the object to$(13_10)avoid
+/// @DnDArgument : "xvel" "move_x"
+/// @DnDArgument : "yvel" "move_y"
+/// @DnDArgument : "maxxmove" "walk_speed"
+/// @DnDArgument : "maxymove" "jump_speed"
+/// @DnDArgument : "object" "obj_floor_temp"
+/// @DnDSaveInfo : "object" "obj_floor_temp"
+move_and_collide(move_x, move_y, obj_floor_temp,4,0,0,walk_speed,jump_speed);
