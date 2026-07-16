@@ -16,8 +16,9 @@ move_x = move_x * walk_speed;
 /// @DnDAction : YoYo Games.Miscellaneous.Debug_Show_Message
 /// @DnDVersion : 1
 /// @DnDHash : 438146EC
+/// @DnDDisabled : 1
 /// @DnDArgument : "msg" "move_x"
-show_debug_message(string(move_x));
+
 
 /// @DnDAction : YoYo Games.Collisions.If_Object_At
 /// @DnDVersion : 1.1
@@ -33,9 +34,8 @@ var l27FBDA57_0 = instance_place(x + 0, y + 2, [obj_floor_temp]);if ((l27FBDA57
 	/// @DnDHash : 1D4034A9
 	/// @DnDComment : landed on the ground.$(13_10)reset the Y of movement$(13_10)back to 0.$(13_10)
 	/// @DnDParent : 27FBDA57
-	/// @DnDArgument : "expr_relative" "1"
 	/// @DnDArgument : "var" "move_y"
-	move_y += 0;
+	move_y = 0;
 
 	/// @DnDAction : YoYo Games.Mouse & Keyboard.If_Key_Pressed
 	/// @DnDVersion : 1
