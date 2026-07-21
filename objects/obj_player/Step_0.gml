@@ -82,4 +82,4 @@ else{	/// @DnDAction : YoYo Games.Common.If_Variable
 /// @DnDArgument : "maxymove" "jump_speed"
 /// @DnDArgument : "object" "obj_floor_temp"
 /// @DnDSaveInfo : "object" "obj_floor_temp"
-move_and_collide(move_x, move_y, obj_floor_temp,4,0,0,walk_speed,jump_speed);
+move_and_collide(move_x, move_y, [obj_floor_temp],4,0,0,walk_speed,jump_speed);
